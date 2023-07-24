@@ -1,0 +1,19 @@
+     1                                 %line 1+1 int_to_ascii.asm
+     2                                 [segment .data]
+     3 00000000 3700000000000000       num dq 55
+     4 00000008 00                     result db 0
+     5                                 
+     6                                 
+     7                                 [segment .text]
+     8                                 
+     9                                 [global main]
+    10                                 main:
+    11                                 
+    12 00000000 488B0425[00000000]     mov rax,[num]
+    13 00000008 4883C030               add rax,'0'
+    14 0000000C 48890425[00000000]     mov [result],rax
+    15                                 
+    16                                 
+    17 00000014 48C7C03C000000         mov rax,60
+    18 0000001B 4831C0                 xor rax,rax
+    19 0000001E 0F05                   syscall

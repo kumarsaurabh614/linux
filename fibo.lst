@@ -1,0 +1,40 @@
+     1                                 %line 1+1 fibo.asm
+     2                                 [segment .data]
+     3 00000000 0000000000000000       result dq 0
+     4 00000008 0800000000000000       n dq 8
+     5                                 
+     6                                 [segment .text]
+     7                                 [global main]
+     8                                 main:
+     9 00000000 55                      push rbp
+    10 00000001 4889E5                  mov rbp,rsp
+    11 00000004 4883EC10                sub rsp,16
+    12 00000008 4C8B0425[00000000]      mov r8,[n]
+    13                                 
+    14 00000010 4983F800                cmp r8,0
+    15 00000014 7E21                    jle exit
+    16 00000016 4831DB                  xor rbx,rbx
+    17 00000019 48C7C101000000          mov rcx,1
+    18                                 
+    19                                 for:
+    20 00000020 4889DA                  mov rdx,rbx
+    21 00000023 4801CA                  add rdx,rcx
+    22                                 
+    23 00000026 4889CB                  mov rbx,rcx
+    24 00000029 4889D1                  mov rcx,rdx
+    25                                 
+    26 0000002C 49FFC8                  dec r8
+    27 0000002F 75ED                    jnz for
+    28                                 
+    29 00000031 48891C25[00000000]      mov [result],rbx
+    30                                 
+    31                                 
+    32                                 
+    33                                 
+    34                                 exit:
+    35 00000039 48C7C03C000000          mov rax,60
+    36 00000040 4831C0                  xor rax,rax
+    37 00000043 0F05                    syscall
+    38                                 
+    39                                 
+    40                                 
