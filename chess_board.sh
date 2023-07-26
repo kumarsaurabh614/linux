@@ -8,10 +8,12 @@ do
 		S=$(((i+j)%2))
 		if [ $S -eq 0 ];
 		then
-			echo -n "0 "
+			echo -ne "\e[47m "
 		else
-			echo -n "1 "
+			echo -ne "\e[40m "
 		fi
-	done
-	echo ""
+
+	echo  -ne "  \e[0m"
+done
+echo
 done

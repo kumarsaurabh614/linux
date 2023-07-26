@@ -8,10 +8,10 @@ typedef struct Node {
 } Node;
 
 Node* create_node(const char* sentence) {
-    Node* newNode = (Node*)malloc(sizeof(Node));
-    newNode->sentence = strdup(sentence);
-    newNode->next = NULL;
-    return newNode;
+    Node* new = (Node*)malloc(sizeof(Node));
+    new->sentence = strdup(sentence);
+    new->next = NULL;
+    return new;
 }
 
 
@@ -25,29 +25,23 @@ void print_last_lines(Node* head, int n) {
         count++;
     }
 
-    int start = count - n + 1;
-    if (start < 0) {
-        start = 0;
+    int i = count - n ;
+    if (i < 0) {
+        i = 0;
     }
 
-    // Traverse to the starting node and print the remaining nodes
     current = head;
     count = 0;
     while (current != NULL) {
-        if (count >= start) {
+        if (count > i) {
             printf("%s", current->sentence);
         }
-        Node* temp = current;
         current = current->next;
         count++;
     }
 }
 
 int main(int argc, char* argv[]) {
-    if (argc != 2) {
-        printf("Usage: %s <number_of_lines>\n", argv[0]);
-        return 1;
-    }
 
     int n = atoi(argv[1]);
 
@@ -68,7 +62,7 @@ int main(int argc, char* argv[]) {
         }
     }
 
-   printf("Last %d lines are : ",n);
+   printf("Last %d lines are :\n ",n);
     print_last_lines(head, n);
 
    
